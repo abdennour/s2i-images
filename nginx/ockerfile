@@ -1,0 +1,7 @@
+FROM docker.io/centos/nginx-112-centos7:latest
+
+USER root
+RUN mv /usr/libexec/s2i/assemble /usr/libexec/s2i/assemble_base
+COPY ./.s2i/bin/. /usr/libexec/s2i
+
+USER 1001
