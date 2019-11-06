@@ -1,1 +1,1 @@
-tar cvzf nginx/example.tar.gz nginx/example
+tar czvf nginx/example.tar.gz -C nginx/example .

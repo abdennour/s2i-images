@@ -7,7 +7,17 @@ rc=$?
 if [ $rc -eq 0 ]; then
     echo "After successful assembling"
     if [ ! -z "${ARTIFACT}" ]; then
-      curl ${ARTIFACT} | tar xvz -
+  #    curl -sSL ${ARTIFACT} | tar xvz -
+       if [[ "${ARTIFACT}" == *"tar.gz" ]]; then
+          curl -sSL ${ARTIFACT} | tar xvz -;		
+       elif [[ "${ARTIFACT}" == *"tar.xz" ]]; then
+          curl -sSL ${ARTIFACT} | tar xvj -;
+       elif [[ "${ARTIFACT}" == *"tar" ]]; then
+          curl -sSL ${ARTIFACT} | tar xv -;
+       else
+          echo "WARNING: Not supported artifact type. Use instead: tar, tar.gz or tar.xz"
+       fi        
+
     fi
 else
     echo "After failed assembling"
